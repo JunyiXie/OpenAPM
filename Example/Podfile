@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'OpenAPM_Example' do
+  pod 'OpenAPM', :path => '../'
+
+  target 'OpenAPM_Tests' do
+    inherit! :search_paths
+
+    pod 'Kiwi'
+  end
+end
