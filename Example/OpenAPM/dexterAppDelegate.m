@@ -7,12 +7,15 @@
 //
 
 #import "dexterAppDelegate.h"
-
+#import <OpenAPM/OpenAPM.h>
 @implementation dexterAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+  
+  [OpenAPM shared];
+  
     return YES;
 }
 

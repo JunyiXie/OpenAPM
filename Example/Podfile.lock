@@ -1,0 +1,22 @@
+PODS:
+  - Kiwi (3.0.0)
+  - MJExtension (3.0.13)
+  - OpenAPM (0.1.0):
+    - MJExtension
+
+DEPENDENCIES:
+  - Kiwi
+  - OpenAPM (from `../`)
+
+EXTERNAL SOURCES:
+  OpenAPM:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Kiwi: fbeafef0f00e4d8f7dcb3420a4930afe70af77f7
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  OpenAPM: 0f43ac716377cdcca3535ab93ad09868acef0925
+
+PODFILE CHECKSUM: 3bb04a2cb12aa8955db7aaf2a0d63e26ec5bfbfd
+
+COCOAPODS: 1.4.0

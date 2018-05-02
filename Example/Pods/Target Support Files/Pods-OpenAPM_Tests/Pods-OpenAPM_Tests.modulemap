@@ -1,0 +1,6 @@
+framework module Pods_OpenAPM_Tests {
+  umbrella header "Pods-OpenAPM_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

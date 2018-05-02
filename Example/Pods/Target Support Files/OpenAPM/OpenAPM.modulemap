@@ -1,0 +1,6 @@
+framework module OpenAPM {
+  umbrella header "OpenAPM-umbrella.h"
+
+  export *
+  module * { export * }
+}
