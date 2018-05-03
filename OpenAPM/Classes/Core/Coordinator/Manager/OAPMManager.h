@@ -17,28 +17,28 @@
 #import "OAPMModuleProtocol.h"
 
 
-#ifndef BeehiveModSectName
+#ifndef OAPMModSectName
 
-#define BeehiveModSectName "BeehiveMods"
-
-#endif
-
-#ifndef BeehiveServiceSectName
-
-#define BeehiveServiceSectName "BeehiveServices"
+#define OAPMModSectName "OAPMMods"
 
 #endif
 
+#ifndef OAPMServiceSectName
 
-#define BeeHiveDATA(sectname) __attribute((used, section("__DATA,"#sectname" ")))
+#define OAPMServiceSectName "OAPMServices"
+
+#endif
+
+
+#define OAPMDATA(sectname) __attribute((used, section("__DATA,"#sectname" ")))
 
 
 
-#define BeeHiveMod(name) \
-class OpenAPM; char * k##name##_mod BeeHiveDATA(BeehiveMods) = ""#name"";
+#define OAPMMod(name) \
+class OpenAPM; char * k##name##_mod OAPMDATA(OAPMMods) = ""#name"";
 
-#define BeeHiveService(servicename,impl) \
-class OpenAPM; char * k##servicename##_service BeeHiveDATA(BeehiveServices) = "{ \""#servicename"\" : \""#impl"\"}";
+#define OAPMService(servicename,impl) \
+class OpenAPM; char * k##servicename##_service OAPMDATA(OAPMServices) = "{ \""#servicename"\" : \""#impl"\"}";
 
 #pragma mark - 事件触发
 typedef NS_ENUM(NSInteger, OAPMModuleEvent)

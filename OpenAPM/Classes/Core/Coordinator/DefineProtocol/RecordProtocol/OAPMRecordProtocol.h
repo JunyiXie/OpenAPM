@@ -16,8 +16,4 @@
 @end
 
 
-@protocol OAPMCPURecordProtocol <OAPMRecordProtocol>
 
-@property (nonatomic, assign) CGFloat usage;
-
-@end

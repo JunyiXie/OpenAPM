@@ -7,13 +7,10 @@
 
 #import <Foundation/Foundation.h>
 #import "OAPMRecordProtocol.h"
-@protocol HMDCPUMonitorServiceProtocol <NSObject>
+#import "OAPMCPURecordProtocol.h"
+#import "OAPMServiceProtocol.h"
+@protocol OAPMCPUMonitorServiceProtocol <OAPMServiceProtocol>
 
-#pragma mark - Initiative
-
-
-
-#pragma mark - Passive
-- (void)cpuDataRecord:(id<OAPMCPURecordProtocol>)record;
+- (id<OAPMCPURecordProtocol>)currentRecord;
 
 @end

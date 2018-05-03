@@ -6,8 +6,8 @@
 //
 
 #import <OpenAPM/OpenAPM.h>
-#import "OAPMMemoryMonitorProtocol.h"
-#import "OAPMCPUEventListenerProtocol.h"
+#import "OAPMCoordinatorProtocols.h"
+#import "OAPMServiceManager.h"
 @interface OAPMMemoryMonitor : OAPMTimerMonitor<OAPMMemoryMonitorProtocol, OAPMCPUEventListenerProtocol>
 
 @end

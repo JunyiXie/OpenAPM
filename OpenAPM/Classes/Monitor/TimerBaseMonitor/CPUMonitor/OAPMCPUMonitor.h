@@ -6,11 +6,13 @@
 //
 
 #import <OpenAPM/OpenAPM.h>
+
+#import "OAPMCoordinatorProtocols.h"
 #import "OAPMTimerMonitor.h"
 
 
 
-@interface OAPMCPUMonitor : OAPMTimerMonitor<OAPMCpuMonitorProtocol>
-
+@interface OAPMCPUMonitor : OAPMTimerMonitor<OAPMCpuMonitorProtocol, OAPMCPUMonitorServiceProtocol>
+- (id<OAPMCPURecordProtocol>)currentRecord;
 
 @end

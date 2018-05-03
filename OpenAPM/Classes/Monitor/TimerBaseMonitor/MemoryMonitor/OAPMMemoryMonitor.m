@@ -6,7 +6,7 @@
 //
 
 #import "OAPMMemoryMonitor.h"
-@BeeHiveMod(OAPMMemoryMonitor)
+@OAPMMod(OAPMMemoryMonitor)
 @implementation OAPMMemoryMonitor
 
 - (void)updateConfiguration:(id<OAPMConfigurationProtocol>)configuration {
@@ -22,7 +22,13 @@
 - (void)start {
 }
 
+#pragma mark - OAPMCPUEventListenerProtocol
 - (void)updateCPUNumber:(NSNumber *)number {
   NSLog(@"OAPMCPUEventListen updateCPUNumber %@", number);
+  
+  // service
+  id<OAPMCPUMonitorServiceProtocol> cpuservice = [[OAPMServiceManager shared] serviceSingletonFromProtocol:@protocol(OAPMCPUMonitorServiceProtocol)];
+  id<OAPMCPURecordProtocol> record = [cpuservice currentRecord];
+  NSLog(@"record: %@", record);
 }
 @end

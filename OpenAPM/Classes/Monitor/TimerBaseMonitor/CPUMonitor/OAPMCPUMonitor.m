@@ -6,8 +6,9 @@
 //
 
 #import "OAPMCPUMonitor.h"
-@BeeHiveMod(OAPMCPUMonitor)
-
+#import "OAPMCPUMonitorRecord.h"
+@OAPMMod(OAPMCPUMonitor)
+@OAPMService(OAPMCPUMonitorServiceProtocol, OAPMCPUMonitor)
 @implementation OAPMCPUMonitor
 
 + (instancetype)shared {
@@ -34,6 +35,12 @@
 - (void)timerCallBack {
   [[OAPMManager shared].moduleEventTriger updateCPUNumber:@1];
 
+}
+#pragma mark - OAPMCPUMonitorServiceProtocol
+- (id<OAPMCPURecordProtocol>)currentRecord {
+  OAPMCPUMonitorRecord *record = [OAPMCPUMonitorRecord new];
+  record.usage = 233;
+  return record;
 }
 
 @end

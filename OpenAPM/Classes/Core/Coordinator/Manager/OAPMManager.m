@@ -12,105 +12,8 @@
 #import "OAPMConfig.h"
 #import "OAPMManagerEventTriger.h"
 #import "OAPMModuleEventTriger.h"
-
-// 全都搞成单例？
-@interface OAPMModuleManager: NSObject
-{
-  NSMutableArray<id<OAPMModuleProtocol>> *_moduleClss;
-}
-
-- (void)addModuleCls:(Class<OAPMModuleProtocol>)cls;
-- (id<OAPMModuleProtocol>)moduleSingletonFromProtocol:(Protocol *)protocol;
-- (NSMutableArray<id<OAPMModuleProtocol>> *)allSharedModuleInstances;
-
-@end
-
-@implementation OAPMModuleManager
-
-+ (instancetype)shared {
-  static dispatch_once_t onceToken;
-  static OAPMModuleManager *instance = nil;
-  dispatch_once(&onceToken, ^{
-    instance = [OAPMModuleManager new];
-  });
-  return instance;
-}
-
-- (instancetype)init {
-  if (self = [super init]) {
-    _moduleClss = [NSMutableArray new];
-  }
-  return self;
-}
-
-- (void)addModuleCls:(Class<OAPMModuleProtocol>)cls {
-  [_moduleClss addObject:cls];
-}
-
-- (id<OAPMModuleProtocol>)moduleSingletonFromProtocol:(Protocol *)protocol {
-  for (id<OAPMModuleProtocol> module in _moduleClss) {
-    if ([module conformsToProtocol:protocol]) {
-      return [module shared];
-    }
-  }
-  return nil;
-}
-
-- (NSMutableArray<id<OAPMModuleProtocol>> *)allSharedModuleInstances {
-  NSMutableArray<id<OAPMModuleProtocol>> * modules = [NSMutableArray new];
-  for (id<OAPMModuleProtocol> moduleCls in _moduleClss) {
-    [modules addObject:[moduleCls shared]];
-  }
-  return modules;
-}
-
-@end
-
-
-
-@interface OAPMServiceManager: NSObject
-{
-  NSMutableArray<NSDictionary *> *_serviceDics;
-}
-- (id<OAPMServiceProtocol>)serviceSingletonFromProtocol:(Protocol *)protocol;
-- (void)addServiceDic:(NSDictionary *)serviceDic;
-@end
-
-
-
-@implementation OAPMServiceManager
-+ (instancetype)shared {
-  static dispatch_once_t onceToken;
-  static OAPMServiceManager *instance = nil;
-  dispatch_once(&onceToken, ^{
-    instance = [OAPMServiceManager new];
-  });
-  return instance;
-}
-- (instancetype)init {
-  if (self = [super init]) {
-    _serviceDics = [NSMutableArray new];
-  }
-  return self;
-}
-- (void)addServiceDic:(NSDictionary *)serviceDic {
-  [_serviceDics addObject:serviceDic];
-}
-- (id<OAPMServiceProtocol>)serviceSingletonFromProtocol:(Protocol *)protocol {
-  NSString *protocolStr = NSStringFromProtocol(protocol);
-  for (NSDictionary *dic in _serviceDics) {
-    if (dic[protocolStr]) {
-      Class<OAPMServiceProtocol> cls = NSClassFromString(dic[protocolStr]);
-      return [cls shared];
-    }
-  }
-  return nil;
-}
-
-@end
-
-
-
+#import "OAPMModuleManager.h"
+#import "OAPMServiceManager.h"
 
 @interface OAPMManager()
 {
@@ -188,10 +91,10 @@
 
 
 #pragma mark - Dyld  Discover Module Service
-NSArray<NSString *>* BHReadConfiguration(char *sectionName,const struct mach_header *mhp);
+NSArray<NSString *>* OAPMReadConfiguration(char *sectionName,const struct mach_header *mhp);
 static void dyld_callback(const struct mach_header *mhp, intptr_t vmaddr_slide)
 {
-  NSArray *mods = BHReadConfiguration(BeehiveModSectName, mhp);
+  NSArray *mods = OAPMReadConfiguration(OAPMModSectName, mhp);
   for (NSString *modName in mods) {
     Class cls;
     if (modName) {
@@ -204,7 +107,7 @@ static void dyld_callback(const struct mach_header *mhp, intptr_t vmaddr_slide)
   }
   
   //register services
-  NSArray<NSString *> *services = BHReadConfiguration(BeehiveServiceSectName,mhp);
+  NSArray<NSString *> *services = OAPMReadConfiguration(OAPMServiceSectName,mhp);
   for (NSString *map in services) {
     NSData *jsonData =  [map dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
@@ -229,7 +132,7 @@ void initProphet() {
   _dyld_register_func_for_add_image(dyld_callback);
 }
 
-NSArray<NSString *>* BHReadConfiguration(char *sectionName,const struct mach_header *mhp)
+NSArray<NSString *>* OAPMReadConfiguration(char *sectionName,const struct mach_header *mhp)
 {
   NSMutableArray *configs = [NSMutableArray array];
   unsigned long size = 0;
