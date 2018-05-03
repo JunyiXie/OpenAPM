@@ -10,7 +10,8 @@
 #import "OAPMModuleProtocol.h"
 #import "OAPMServiceProtocol.h"
 #import "OAPMConfig.h"
-
+#import "OAPMManagerEventTriger.h"
+#import "OAPMModuleEventTriger.h"
 
 // 全都搞成单例？
 @interface OAPMModuleManager: NSObject
@@ -20,8 +21,12 @@
 
 - (void)addModuleCls:(Class<OAPMModuleProtocol>)cls;
 - (id<OAPMModuleProtocol>)moduleSingletonFromProtocol:(Protocol *)protocol;
+- (NSMutableArray<id<OAPMModuleProtocol>> *)allSharedModuleInstances;
+
 @end
+
 @implementation OAPMModuleManager
+
 + (instancetype)shared {
   static dispatch_once_t onceToken;
   static OAPMModuleManager *instance = nil;
@@ -30,15 +35,18 @@
   });
   return instance;
 }
+
 - (instancetype)init {
   if (self = [super init]) {
     _moduleClss = [NSMutableArray new];
   }
   return self;
 }
+
 - (void)addModuleCls:(Class<OAPMModuleProtocol>)cls {
   [_moduleClss addObject:cls];
 }
+
 - (id<OAPMModuleProtocol>)moduleSingletonFromProtocol:(Protocol *)protocol {
   for (id<OAPMModuleProtocol> module in _moduleClss) {
     if ([module conformsToProtocol:protocol]) {
@@ -47,6 +55,15 @@
   }
   return nil;
 }
+
+- (NSMutableArray<id<OAPMModuleProtocol>> *)allSharedModuleInstances {
+  NSMutableArray<id<OAPMModuleProtocol>> * modules = [NSMutableArray new];
+  for (id<OAPMModuleProtocol> moduleCls in _moduleClss) {
+    [modules addObject:[moduleCls shared]];
+  }
+  return modules;
+}
+
 @end
 
 
@@ -144,34 +161,24 @@
 
 - (id<OAPMServiceProtocol>)serviceFromProtocol:(Protocol *)protocol {
   return [[OAPMServiceManager shared] serviceSingletonFromProtocol:protocol];
-//  NSString *protocolStr = NSStringFromProtocol(protocol);
-//  for (NSDictionary *dic in _serviceDics) {
-//    if (dic[protocolStr]) {
-//      Class<OAPMServiceProtocol> cls = NSClassFromString(dic[protocolStr]);
-//      return [cls shared];
-//    }
-//  }
-//  return nil;
 }
 
 - (id<OAPMModuleProtocol>)moduleFromProtocol:(Protocol *)protocol {
-//  for (id<OAPMModuleProtocol> module in _moduleClss) {
-//    if ([module conformsToProtocol:protocol]) {
-//      return [module shared];
-//    }
-//  }
-//  return nil;
   return [[OAPMModuleManager shared] moduleSingletonFromProtocol:protocol];
 }
 
 
+#pragma mark GET
+- (OAPMModuleEventTriger *)moduleEventTriger {
+  return [OAPMModuleEventTriger proxyWithTargets:[[OAPMModuleManager shared] allSharedModuleInstances]];
+}
 
 #pragma mark - Event
 - (void)trigerEvent:(OAPMModuleEvent)event {
   switch (event) {
     case ModuleStart:
     {
-      [[OAPMConfig shared] trigerStartEventForModuleClss:_moduleClss];
+      [[OAPMManagerEventTriger shared] trigerStartEventForModules:[[OAPMModuleManager shared] allSharedModuleInstances]];
     }
       break;
     default:

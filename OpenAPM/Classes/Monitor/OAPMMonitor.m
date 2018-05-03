@@ -8,9 +8,6 @@
 #import "OAPMMonitor.h"
 
 @implementation OAPMMonitor
-- (void)startWithConfiguration:(id<OAPMConfigurationProtocol>)configuration {
-}
-- (void)endWithConfiguration:(id<OAPMConfigurationProtocol>)configuration {
-}
+
 
 @end

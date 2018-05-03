@@ -28,23 +28,6 @@ dispatch_queue_t oapm_get_monitor_queue(void)
   });
   return monitor_queue;
 }
-+ (instancetype)shared {
-  static dispatch_once_t onceToken;
-  static OAPMTimerMonitor *instance = nil;
-  dispatch_once(&onceToken, ^{
-    instance = [OAPMTimerMonitor new];
-  });
-  return instance;
-}
-- (void)startWithConfiguration:(id<OAPMTimerMonitorConfigurationProtocol>)configuration {
-  [super startWithConfiguration:configuration];
-  [self startWithInterval:configuration.interval];
-}
-- (void)endWithConfiguration:(id<OAPMTimerMonitorConfigurationProtocol>)configuration {
-  [super startWithConfiguration:configuration];
-  [self timerEnd];
-}
-
 
 #pragma mark timer
 
@@ -54,14 +37,13 @@ dispatch_queue_t oapm_get_monitor_queue(void)
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, oapm_get_monitor_queue());
     dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, _interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     dispatch_source_set_event_handler(_timer, ^{
-      
+      [self timerCallBack];
     });
     dispatch_resume(_timer);
   } else {
     if (interval != _interval) {
       _interval = interval;
       dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, _interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-      
     }
   }
 }
@@ -71,6 +53,10 @@ dispatch_queue_t oapm_get_monitor_queue(void)
     dispatch_source_cancel(_timer);
     _timer = nil;
   }
+}
+
+- (void)timerCallBack {
+  
 }
 
 

@@ -18,9 +18,6 @@
   return instance;
 }
 
-- (void)trigerStartEventForModuleClss:(NSMutableArray<id<OAPMModuleProtocol>> *)moduleClss {
-  
-}
 
 
 - (NSMutableArray<id<OAPMConfigurationProtocol>> *)modules {

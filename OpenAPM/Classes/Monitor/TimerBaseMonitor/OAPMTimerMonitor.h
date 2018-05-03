@@ -10,7 +10,7 @@
 #import "OAPMMonitor.h"
 
 @interface OAPMTimerMonitor : OAPMMonitor
-
 @property (nonatomic, assign) CGFloat interval;
-+ (instancetype)shared;
+- (void)timerCallBack;
+- (void)startWithInterval:(CGFloat)interval;
 @end

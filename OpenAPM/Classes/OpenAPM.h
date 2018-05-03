@@ -9,6 +9,8 @@
 #import "OAPMCoordinatorProtocols.h"
 #import "OAPMManager.h"
 #import "OAPMCPUMonitor.h"
+#import "OAPMModuleEventTriger.h"
+
 @interface OpenAPM : NSObject
 + (instancetype)shared;
 @end

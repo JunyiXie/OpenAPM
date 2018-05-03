@@ -16,6 +16,7 @@
 #import "OAPMServiceProtocol.h"
 #import "OAPMModuleProtocol.h"
 
+
 #ifndef BeehiveModSectName
 
 #define BeehiveModSectName "BeehiveMods"
@@ -39,17 +40,23 @@ class OpenAPM; char * k##name##_mod BeeHiveDATA(BeehiveMods) = ""#name"";
 #define BeeHiveService(servicename,impl) \
 class OpenAPM; char * k##servicename##_service BeeHiveDATA(BeehiveServices) = "{ \""#servicename"\" : \""#impl"\"}";
 
-@interface OAPMManager : NSObject
-
-+ (instancetype)shared;
-- (id<OAPMModuleProtocol>)moduleFromProtocol:(Protocol *)protocol;
-- (id<OAPMServiceProtocol>)serviceFromProtocol:(Protocol *)protocol;
-
 #pragma mark - 事件触发
 typedef NS_ENUM(NSInteger, OAPMModuleEvent)
 {
   ModuleStart = 1,
 };
 
+@class OAPMModuleEventTriger;
+@interface OAPMManager : NSObject
+
++ (instancetype)shared;
+- (id<OAPMModuleProtocol>)moduleFromProtocol:(Protocol *)protocol;
+- (id<OAPMServiceProtocol>)serviceFromProtocol:(Protocol *)protocol;
+@property (nonatomic, strong)  OAPMModuleEventTriger *moduleEventTriger;
+
+
+
+
+- (void)trigerEvent:(OAPMModuleEvent)event;
 
 @end

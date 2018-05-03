@@ -22,16 +22,9 @@
 - (instancetype)init {
   if (self = [super init]) {
     
-    // 做个初始化 读取module
-    [OAPMManager shared];
-    
-    
-    
-//    [[OAPM shareInstance] setContext:[BHContext shareInstance]];
-//    [[OAPM shareInstance] ]
-
-//    [[BHModuleManager sharedManager] registerCustomEvent:OAPMStartEvent andSelectorStr:@"startWithConfiguration:"];
-//    [OAPM triggerCustomEvent:OAPMStartEvent];
+    // 触发Event
+    [[OAPMManager shared]  trigerEvent:ModuleStart];
+    // 从Event 接收数据流
   }
   return self;
 }

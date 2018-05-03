@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "OAPMCoordinatorProtocols.h"
 
-@interface OAPMMonitor : NSObject<OAPMMonitorProtocol>
+@interface OAPMMonitor : NSObject
 @property (nonatomic, strong) id<OAPMRecordMessageSenderProtocol> messageSender;
 
 @end

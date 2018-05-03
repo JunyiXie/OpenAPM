@@ -12,4 +12,5 @@
 
 @interface OAPMCPUMonitor : OAPMTimerMonitor<OAPMCpuMonitorProtocol>
 
+
 @end

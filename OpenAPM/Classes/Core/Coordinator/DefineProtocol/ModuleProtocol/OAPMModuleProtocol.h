@@ -9,5 +9,7 @@
 
 @protocol OAPMModuleProtocol <NSObject>
 + (instancetype)shared;
+- (void)start;
+
 
 @end

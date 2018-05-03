@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@protocol OAPMCpuMonitorProtocol <NSObject>
+#import "OAPMMonitorProtocol.h"
+@protocol OAPMCpuMonitorProtocol <OAPMMonitorProtocol>
 
 @end

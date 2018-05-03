@@ -11,6 +11,5 @@
 
 @interface OAPMConfig : NSObject
 + (instancetype)shared;
-- (void)trigerStartEventForModuleClss:(NSMutableArray<id<OAPMModuleProtocol>> *)modules;
 @property (nonatomic, strong) NSMutableArray<id<OAPMConfigurationProtocol>> *modules;
 @end

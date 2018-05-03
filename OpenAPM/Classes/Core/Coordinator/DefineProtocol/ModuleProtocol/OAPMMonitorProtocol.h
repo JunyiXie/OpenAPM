@@ -10,7 +10,7 @@
 #import "OAPMConfigProtocol.h"
 #import "OAPMModuleProtocol.h"
 
-@protocol OAPMMonitorProtocol <NSObject,OAPMConfigEvent,OAPMModuleProtocol>
+@protocol OAPMMonitorProtocol <NSObject,OAPMConfigProtocol,OAPMModuleProtocol>
 @property (nonatomic, strong) id<OAPMRecordMessageSenderProtocol> messageSender;
 
 
