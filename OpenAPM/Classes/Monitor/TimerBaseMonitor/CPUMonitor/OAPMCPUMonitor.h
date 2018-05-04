@@ -15,4 +15,5 @@
 @interface OAPMCPUMonitor : OAPMTimerMonitor<OAPMCpuMonitorProtocol, OAPMCPUMonitorServiceProtocol>
 - (id<OAPMCPURecordProtocol>)currentRecord;
 
+
 @end

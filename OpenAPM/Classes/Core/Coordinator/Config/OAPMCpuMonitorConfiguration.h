@@ -9,5 +9,6 @@
 #import "OAPMConfigProtocol.h"
 
 @interface OAPMCpuMonitorConfiguration : NSObject<OAPMCPUMonitorConfigurationProtocol>
-@property (nonatomic,assign) CGFloat interval;
+@property (nonatomic, assign) CGFloat interval;
+@property (nonatomic, strong) Protocol *protocol;
 @end

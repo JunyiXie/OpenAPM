@@ -22,13 +22,16 @@
 - (void)start {
 }
 
+- (void)updateConfig:(id<OAPMConfigurationProtocol>)configuration {
+}
+
+
 #pragma mark - OAPMCPUEventListenerProtocol
 - (void)updateCPUNumber:(NSNumber *)number {
   NSLog(@"OAPMCPUEventListen updateCPUNumber %@", number);
-  
   // service
   id<OAPMCPUMonitorServiceProtocol> cpuservice = [[OAPMServiceManager shared] serviceSingletonFromProtocol:@protocol(OAPMCPUMonitorServiceProtocol)];
   id<OAPMCPURecordProtocol> record = [cpuservice currentRecord];
-  NSLog(@"record: %@", record);
+  NSLog(@"service record: %@", record);
 }
 @end

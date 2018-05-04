@@ -7,6 +7,7 @@
 
 #import "OAPMConfig.h"
 #import "OAPMCpuMonitorConfiguration.h"
+#import "OAPMCpuMonitorProtocol.h"
 @implementation OAPMConfig
 
 + (instancetype)shared {
@@ -20,9 +21,11 @@
 
 
 
-- (NSMutableArray<id<OAPMConfigurationProtocol>> *)modules {
+/// 暂时这样写，替换为remote 数据解析.
+- (NSMutableArray<id<OAPMConfigurationProtocol>> *)configurations {
   OAPMCpuMonitorConfiguration *cpuConfiguration = [OAPMCpuMonitorConfiguration new];
   cpuConfiguration.interval = 1;
+  cpuConfiguration.protocol = @protocol(OAPMCpuMonitorProtocol);
   return [NSMutableArray arrayWithObjects:cpuConfiguration, nil];
 }
 

@@ -11,5 +11,5 @@
 
 @interface OAPMConfig : NSObject
 + (instancetype)shared;
-@property (nonatomic, strong) NSMutableArray<id<OAPMConfigurationProtocol>> *modules;
+@property (nonatomic, strong) NSMutableArray<id<OAPMConfigurationProtocol>> *configurations;
 @end

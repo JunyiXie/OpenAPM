@@ -15,6 +15,7 @@
 #include <mach-o/ldsyms.h>
 #import "OAPMServiceProtocol.h"
 #import "OAPMModuleProtocol.h"
+#import "OAPMConfig.h"
 
 
 #ifndef OAPMModSectName
@@ -54,9 +55,8 @@ typedef NS_ENUM(NSInteger, OAPMModuleEvent)
 - (id<OAPMServiceProtocol>)serviceFromProtocol:(Protocol *)protocol;
 @property (nonatomic, strong)  OAPMModuleEventTriger *moduleEventTriger;
 
+- (void)trigerManagerEvent:(OAPMModuleEvent)event;
 
-
-
-- (void)trigerEvent:(OAPMModuleEvent)event;
+- (void)updateConfigs:(NSMutableArray<id<OAPMConfigurationProtocol>> *)configs;
 
 @end

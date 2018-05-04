@@ -9,11 +9,9 @@
 #import <objc/message.h>
 @implementation OAPMModuleEventTriger
 {
-  BOOL _isRespond;
 }
 - (instancetype)initWithTargets:(NSMutableArray *)targets {
   _targets = targets;
-  _isRespond = NO;
   return self;
 }
 

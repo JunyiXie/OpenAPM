@@ -20,6 +20,18 @@ it, simply add the following line to your Podfile:
 pod 'OpenAPM'
 ```
 
+## 结构
+- Coordinator 协调器，协调模块调用，配置，初始化，事件。
+    - Config 配置模块
+    - DefineProcotol 定义的协议，组件依赖协议进行解耦
+    - EventTriger 事件触发，事件代理
+    - Mananger 管理module,service,event
+- Monitor 监控模块
+- Crash
+- UITracker..
+- OOM
+- ...
+- 
 ## Author
 
 junyixie, xiejunyi19970518@outlook.com

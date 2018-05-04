@@ -70,6 +70,19 @@
   return [[OAPMModuleManager shared] moduleSingletonFromProtocol:protocol];
 }
 
+#pragma mark UpdateConfig
+- (void)updateConfigs:(NSMutableArray<id<OAPMConfigurationProtocol>> *)configs
+{
+  [[[OAPMModuleManager shared] allSharedModuleInstances] enumerateObjectsUsingBlock:^(id<OAPMModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    for (id<OAPMConfigurationProtocol> config in configs) {
+      Protocol *protocol = config.protocol;
+      if ([obj conformsToProtocol:protocol]) {
+        [obj updateConfig:config];
+      }
+    }
+  }];
+}
+
 
 #pragma mark GET
 - (OAPMModuleEventTriger *)moduleEventTriger {
@@ -77,7 +90,7 @@
 }
 
 #pragma mark - Event
-- (void)trigerEvent:(OAPMModuleEvent)event {
+- (void)trigerManagerEvent:(OAPMModuleEvent)event {
   switch (event) {
     case ModuleStart:
     {

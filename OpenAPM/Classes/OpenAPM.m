@@ -21,10 +21,10 @@
 
 - (instancetype)init {
   if (self = [super init]) {
-    
+    // 触发配置
+    [[OAPMManager shared] updateConfigs:[[OAPMConfig shared] configurations]];
     // 触发Event
-    [[OAPMManager shared]  trigerEvent:ModuleStart];
-    // 从Event 接收数据流
+    [[OAPMManager shared]  trigerManagerEvent:ModuleStart];
   }
   return self;
 }

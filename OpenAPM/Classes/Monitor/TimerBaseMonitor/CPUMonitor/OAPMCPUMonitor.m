@@ -20,19 +20,23 @@
   return instance;
 }
 
-- (void)updateConfiguration:(id<OAPMConfigurationProtocol>)configuration {
-  
-}
 
 - (void)start {
   NSLog(@"%@ start", self);
-  [self startWithInterval:1];
+  [self startWithInterval:self.interval];
 }
+
+
+
 
 - (void)startWithInterval:(CGFloat)interval {
   [super startWithInterval:interval];
 }
+
+/// 随便写的回调，后续要加入合适的参数 返回值
 - (void)timerCallBack {
+  
+  NSLog(@"CPUMonitor 产生的模块事件");
   [[OAPMManager shared].moduleEventTriger updateCPUNumber:@1];
 
 }
@@ -41,6 +45,12 @@
   OAPMCPUMonitorRecord *record = [OAPMCPUMonitorRecord new];
   record.usage = 233;
   return record;
+}
+#pragma mark - OAPMCPUMonitorConfigurationProtocol
+
+- (void)updateConfig:(id<OAPMConfigurationProtocol>)configuration {
+  self.interval = ((id<OAPMCPUMonitorConfigurationProtocol>)configuration).interval;
+  NSLog(@"OAPMCPUMonitor updateConfig %@", configuration);
 }
 
 @end
