@@ -31,11 +31,14 @@
   return [NSMethodSignature signatureWithObjCTypes:"v@:@"];
 }
 
+/// not in main queue
 - (void)forwardInvocation:(NSInvocation *)invocation {
   SEL sel = invocation.selector;
   for (id target in _targets) {
     if ([target respondsToSelector:sel]) {
-      [invocation invokeWithTarget:target];
+      dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [invocation invokeWithTarget:target];
+      });
     }
   }
 }

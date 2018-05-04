@@ -19,7 +19,9 @@
 }
 - (void)trigerStartEventForModules:(NSMutableArray<id<OAPMModuleProtocol>> *)modules{
   for (id<OAPMModuleProtocol> module in modules) {
-    [module start];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+      [module start];
+    });
   }
 }
 

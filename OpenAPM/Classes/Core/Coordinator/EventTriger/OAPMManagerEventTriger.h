@@ -10,5 +10,7 @@
 
 @interface OAPMManagerEventTriger : NSObject
 + (instancetype)shared;
+
+/// not in main queue
 - (void)trigerStartEventForModules:(NSMutableArray<id<OAPMModuleProtocol>> *)modules;
 @end
