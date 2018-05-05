@@ -27,11 +27,7 @@ pod 'OpenAPM'
     - EventTriger 事件触发，事件代理
     - Mananger 管理module,service,event
 - Monitor 监控模块
-- Crash
-- UITracker..
-- OOM
-- ...
-- 
+
 ## Author
 
 junyixie, xiejunyi19970518@outlook.com
