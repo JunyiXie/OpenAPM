@@ -7,9 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "OAPMRecordMessageSenderProtocol.h"
-#import "OAPMConfigProtocol.h"
 #import "OAPMModuleProtocol.h"
 
-@protocol OAPMMonitorProtocol <NSObject,OAPMConfigProtocol,OAPMModuleProtocol>
+@protocol OAPMMonitorProtocol <NSObject,OAPMModuleProtocol>
 
 @end

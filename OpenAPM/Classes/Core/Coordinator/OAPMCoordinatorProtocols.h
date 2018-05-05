@@ -24,6 +24,9 @@
 #import "OAPMMemoryMonitorProtocol.h"
 #import "OAPMMonitorProtocol.h"
 
+#pragma mark UITracker
+#import "OAPMUITrackerProtocol.h"
+
 #pragma mark - Service
 #import "OAPMCPUEventListenerProtocol.h"
 #import "OAPMCPUMonitorServiceProtocol.h"

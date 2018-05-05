@@ -21,13 +21,11 @@
 }
 
 
+#pragma mark - OAPMModuleProtocol
 - (void)start {
   NSLog(@"%@ start", self);
   [self startWithInterval:self.interval];
 }
-
-
-
 
 - (void)startWithInterval:(CGFloat)interval {
   [super startWithInterval:interval];

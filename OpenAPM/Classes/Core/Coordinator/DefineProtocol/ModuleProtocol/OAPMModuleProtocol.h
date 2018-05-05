@@ -7,9 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "OAPMConfigProtocol.h"
-@protocol OAPMModuleProtocol <NSObject>
+@protocol OAPMModuleProtocol <OAPMConfigProtocol>
 + (instancetype)shared;
 - (void)start;
-- (void)updateConfig:(id<OAPMConfigurationProtocol>)configuration;
 
 @end

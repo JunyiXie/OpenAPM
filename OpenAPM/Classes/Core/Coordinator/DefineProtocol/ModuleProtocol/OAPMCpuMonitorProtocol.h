@@ -8,5 +8,6 @@
 #import <Foundation/Foundation.h>
 #import "OAPMMonitorProtocol.h"
 @protocol OAPMCpuMonitorProtocol <OAPMMonitorProtocol>
+@property (nonatomic, assign) CGFloat interval;
 
 @end

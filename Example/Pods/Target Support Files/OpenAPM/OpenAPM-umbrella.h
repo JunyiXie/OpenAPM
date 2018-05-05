@@ -18,7 +18,7 @@
 #import "OAPMMemoryMonitorProtocol.h"
 #import "OAPMModuleProtocol.h"
 #import "OAPMMonitorProtocol.h"
-#import "OAPMTimerMonitorProtocol.h"
+#import "OAPMUITrackerProtocol.h"
 #import "OAPMCPURecordProtocol.h"
 #import "OAPMRecordProtocol.h"
 #import "OAPMServiceProtocol.h"
@@ -32,10 +32,12 @@
 #import "OAPMCoordinatorProtocols.h"
 #import "OAPMMonitor.h"
 #import "OAPMCPUMonitor.h"
+#import "OAPMCPUMonitorRecord.h"
 #import "OAPMMemoryMonitor.h"
 #import "OAPMTimerMonitor.h"
 #import "OpenAPM-Private.h"
 #import "OpenAPM.h"
+
 
 FOUNDATION_EXPORT double OpenAPMVersionNumber;
 FOUNDATION_EXPORT const unsigned char OpenAPMVersionString[];
