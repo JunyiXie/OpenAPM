@@ -1,4 +1,4 @@
-# OpenAPM
+# 模块间耦合
 
 [![CI Status](https://img.shields.io/travis/junyixie/OpenAPM.svg?style=flat)](https://travis-ci.org/junyixie/OpenAPM)
 [![Version](https://img.shields.io/cocoapods/v/OpenAPM.svg?style=flat)](https://cocoapods.org/pods/OpenAPM)
