@@ -20,6 +20,8 @@ it, simply add the following line to your Podfile:
 pod 'OpenAPM'
 ```
 
+## **写着玩的 练练解耦合**
+
 ## 结构
 - Coordinator 协调器，协调模块调用，配置，初始化，事件。
     - Config 配置模块
